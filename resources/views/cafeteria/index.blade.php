@@ -9,7 +9,7 @@
 
 <form action="/testaddkakunin" method="post">
     {{ csrf_field() }}
-    <div>会員ID:<input type="text" name="kid"></div>
+    <div>会員ID2:<input type="text" name="kid"></div>
     <input type="submit" value="ログイン">
 </form>
 </body>
