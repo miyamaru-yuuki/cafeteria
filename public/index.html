@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=yes">
+    <title>メニュー選択画面</title>
+    <style>
+    </style>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            function showMenu() {
+                $.ajax({
+                    url: "/api/cafeteria/",
+                    type: "GET",
+                    async: true,
+                    data: null,
+                    dataType: "json",
+                    success: function (json) {
+                        //成功時の処理
+                        json.menuData.forEach(function (data) {
+                            $("#menu").append('<option value="' +data.mid+ '">' +data.mname+ '</option>')
+                        });
+                    },
+                    error: function () {
+                        alertError()
+                    }
+                });
+            }
+            showMenu();
+        })
+    </script>
+</head>
+<body>
+<header>
+    <h1>メニュー選択画面</h1>
+</header>
+<nav>
+</nav>
+<main>
+    <select name="menu" id="menu">
+    </select>
+</main>
+<footer>
+</footer>
+</div>
+</body>
+</html>
