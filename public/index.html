@@ -28,6 +28,13 @@
                     }
                 });
             }
+
+            $('#fm1').submit(function(){
+                $('#menu').show();
+                return false;
+            });
+
+            $('#menu').hide();
             showMenu();
         })
     </script>
@@ -39,7 +46,7 @@
 <nav>
 </nav>
 <main>
-    <form action="index.html" method="post">
+    <form action="index.html" method="post" id="fm1">
         <p>会員ID：<input type="number" name="kid"></p>
         <input type="submit" value="ログイン">
     </form>
