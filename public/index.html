@@ -38,15 +38,29 @@
             });
 
             $('#fm2').submit(function(){
-                var kid = $('input[name="kid"]').val();
+                if(mid == 1){
+                    curry = curry + parseInt($('input[name="kosu"]').val(), 10);
+                    $("label#curry").text('カレー:' +curry);
+                }else if(mid == 2){
+                    ramen = ramen + parseInt($('input[name="kosu"]').val(), 10);
+                    $("label#ramen").text('ラーメン:' +ramen);
+                }else if(mid == 3){
+                    sarada = sarada + parseInt($('input[name="kosu"]').val(), 10);
+                    $("label#sarada").text('サラダ:' +sarada);
+                }
                 return false;
             });
 
             $(document).on("click",".menulink",function(){
+                mid = $(this).attr("href");
                 $('#fm2').show();
                 return false;
             });
 
+            var mid;
+            var curry = 0;
+            var ramen = 0;
+            var sarada = 0;
             $('#menu').hide();
             $('#fm2').hide();
         })
@@ -69,6 +83,9 @@
         <p>個数：<input type="number" name="kosu"></p>
         <input type="submit" value="確定">
     </form>
+    <label name="curry" id="curry"></label>
+    <label name="ramen" id="ramen"></label>
+    <label name="sarada" id="sarada"></label>
 </main>
 <footer>
 </footer>
