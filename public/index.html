@@ -20,7 +20,7 @@
                     success: function (json) {
                         //成功時の処理
                         json.menuData.forEach(function (data) {
-                            $("#menu").append('<option value="' +data.mid+ '">' +data.mname+ '</option>')
+                            $("#menu").append('<div><a class="menulink" href="' +data.mid+ '">' +data.mname+ '</a></div>')
                         });
                     },
                     error: function () {
@@ -32,10 +32,23 @@
             $('#fm1').submit(function(){
                 var kid = $('input[name="kid"]').val();
                 $('#menu').show();
+                $('#fm1').hide();
                 showMenu();
                 return false;
             });
+
+            $('#fm2').submit(function(){
+                var kid = $('input[name="kid"]').val();
+                return false;
+            });
+
+            $(document).on("click",".menulink",function(){
+                $('#fm2').show();
+                return false;
+            });
+
             $('#menu').hide();
+            $('#fm2').hide();
         })
     </script>
 </head>
@@ -50,8 +63,12 @@
         <p>会員ID：<input type="number" name="kid"></p>
         <input type="submit" value="ログイン">
     </form>
-    <select name="menu" id="menu">
-    </select>
+    <div name="menu" id="menu">
+    </div>
+    <form id="fm2">
+        <p>個数：<input type="number" name="kosu"></p>
+        <input type="submit" value="確定">
+    </form>
 </main>
 <footer>
 </footer>
