@@ -45,8 +45,12 @@ class CafeteriaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($gid)
+    public function show($mid)
     {
+        $menu = new Menu();
+        $menuData = $menu->find($mid);
+
+        return response()->json(['menuData' => $menuData]);
     }
 
     /**

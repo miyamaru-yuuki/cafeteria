@@ -29,6 +29,44 @@
                 });
             }
 
+            function showMenuSingle(mid){
+                $.ajax({
+                    url: "/api/cafeteria/" + mid,
+                    type: "GET",
+                    async: true,
+                    data: null,
+                    dataType: "json",
+                    success: function (json) {
+                        //成功時の処理
+                        $('#mname').text(json.menuData.mname);
+                    },
+                    error: function () {
+                        alertError()
+                    }
+                });
+            }
+
+            function getMname(mid){
+                $.ajax({
+                    url: "/api/cafeteria/" + mid,
+                    type: "GET",
+                    async: true,
+                    data: null,
+                    dataType: "json",
+                    success: function (json) {
+                        //成功時の処理
+                        $('#mname').text(json.menuData.mname);
+                    },
+                    error: function () {
+                        alertError()
+                    }
+                });
+            }
+
+            function alertError(){
+                alert('http通信に失敗しました');
+            }
+
             $('#fm1').submit(function(){
                 var kid = $('input[name="kid"]').val();
                 $('#menu').show();
@@ -38,21 +76,22 @@
             });
 
             $('#fm2').submit(function(){
-                if(mid == 1){
-                    curry = curry + parseInt($('input[name="kosu"]').val(), 10);
-                    $("label#curry").text('カレー:' +curry);
-                }else if(mid == 2){
-                    ramen = ramen + parseInt($('input[name="kosu"]').val(), 10);
-                    $("label#ramen").text('ラーメン:' +ramen);
-                }else if(mid == 3){
-                    sarada = sarada + parseInt($('input[name="kosu"]').val(), 10);
-                    $("label#sarada").text('サラダ:' +sarada);
-                }
+                // if(mid == 1){
+                //     curry = curry + parseInt($('input[name="kosu"]').val(), 10);
+                //     $("label#curry").text('カレー:' +curry);
+                // }else if(mid == 2){
+                //     ramen = ramen + parseInt($('input[name="kosu"]').val(), 10);
+                //     $("label#ramen").text('ラーメン:' +ramen);
+                // }else if(mid == 3){
+                //     sarada = sarada + parseInt($('input[name="kosu"]').val(), 10);
+                //     $("label#sarada").text('サラダ:' +sarada);
+                // }
                 return false;
             });
 
             $(document).on("click",".menulink",function(){
                 mid = $(this).attr("href");
+                showMenuSingle(mid);
                 $('#fm2').show();
                 return false;
             });
@@ -80,6 +119,7 @@
     <div name="menu" id="menu">
     </div>
     <form id="fm2">
+        <div id="mname"></div>
         <p>個数：<input type="number" name="kosu"></p>
         <input type="submit" value="確定">
     </form>
