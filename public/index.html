@@ -46,23 +46,6 @@
                 });
             }
 
-            function getMname(mid){
-                $.ajax({
-                    url: "/api/cafeteria/" + mid,
-                    type: "GET",
-                    async: true,
-                    data: null,
-                    dataType: "json",
-                    success: function (json) {
-                        //成功時の処理
-                        $('#mname').text(json.menuData.mname);
-                    },
-                    error: function () {
-                        alertError()
-                    }
-                });
-            }
-
             function alertError(){
                 alert('http通信に失敗しました');
             }
@@ -76,16 +59,9 @@
             });
 
             $('#fm2').submit(function(){
-                // if(mid == 1){
-                //     curry = curry + parseInt($('input[name="kosu"]').val(), 10);
-                //     $("label#curry").text('カレー:' +curry);
-                // }else if(mid == 2){
-                //     ramen = ramen + parseInt($('input[name="kosu"]').val(), 10);
-                //     $("label#ramen").text('ラーメン:' +ramen);
-                // }else if(mid == 3){
-                //     sarada = sarada + parseInt($('input[name="kosu"]').val(), 10);
-                //     $("label#sarada").text('サラダ:' +sarada);
-                // }
+                kosu = kosu + parseInt($('input[name="kosu"]').val(), 10);
+                alert(mid);
+                alert(kosu);
                 return false;
             });
 
@@ -97,9 +73,7 @@
             });
 
             var mid;
-            var curry = 0;
-            var ramen = 0;
-            var sarada = 0;
+            var kosu = 0;
             $('#menu').hide();
             $('#fm2').hide();
         })
@@ -123,9 +97,7 @@
         <p>個数：<input type="number" name="kosu"></p>
         <input type="submit" value="確定">
     </form>
-    <label name="curry" id="curry"></label>
-    <label name="ramen" id="ramen"></label>
-    <label name="sarada" id="sarada"></label>
+    <div name="kosu" id="kosu"></div>
 </main>
 <footer>
 </footer>
