@@ -34,7 +34,6 @@
                 var kid = $('input[name="kid"]').val();
                 $('#menu').show();
                 $('#fm1').hide();
-                showMenu();
                 menuData.forEach(function (data) {
                     $("#menu").append('<div><a class="menulink" href="' +data.mid+ '">' +data.mname+ '</a></div>')
                 });
@@ -61,6 +60,7 @@
             var kosu = 0;
             $('#menu').hide();
             $('#fm2').hide();
+            showMenu();
         })
     </script>
 </head>
