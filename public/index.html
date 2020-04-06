@@ -10,36 +10,14 @@
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
     <script type="text/javascript">
         $(function() {
-            function showMenu() {
+            function showMenu(func) {
                 $.ajax({
                     url: "/api/cafeteria/",
                     type: "GET",
                     async: true,
                     data: null,
                     dataType: "json",
-                    success: function (json) {
-                        //成功時の処理
-                        json.menuData.forEach(function (data) {
-                            $("#menu").append('<div><a class="menulink" href="' +data.mid+ '">' +data.mname+ '</a></div>')
-                        });
-                    },
-                    error: function () {
-                        alertError()
-                    }
-                });
-            }
-
-            function showMenuSingle(mid){
-                $.ajax({
-                    url: "/api/cafeteria/" + mid,
-                    type: "GET",
-                    async: true,
-                    data: null,
-                    dataType: "json",
-                    success: function (json) {
-                        //成功時の処理
-                        $('#mname').text(json.menuData.mname);
-                    },
+                    success: func,
                     error: function () {
                         alertError()
                     }
@@ -54,20 +32,32 @@
                 var kid = $('input[name="kid"]').val();
                 $('#menu').show();
                 $('#fm1').hide();
-                showMenu();
+                showMenu(
+                    function (json){
+                        json.menuData.forEach(function (data) {
+                            $("#menu").append('<div><a class="menulink" href="' +data.mid+ '">' +data.mname+ '</a></div>')
+                        });
+                    }
+                );
                 return false;
             });
 
             $('#fm2').submit(function(){
                 kosu = kosu + parseInt($('input[name="kosu"]').val(), 10);
-                alert(mid);
-                alert(kosu);
+                showMenu(
+                    function (json){
+                        json.menuData.forEach(function (data) {
+                            $("#menu2").append('<div><a class="menulink" href="' +data.mid+ '">' +data.mname+ '</a></div>')
+                        });
+                    }
+                );
                 return false;
             });
 
             $(document).on("click",".menulink",function(){
                 mid = $(this).attr("href");
-                showMenuSingle(mid);
+                mname = $(this).text();
+                $('#mname').text(mname);
                 $('#fm2').show();
                 return false;
             });
@@ -98,6 +88,8 @@
         <input type="submit" value="確定">
     </form>
     <div name="kosu" id="kosu"></div>
+    <div name="menu2" id="menu2">
+    </div>
 </main>
 <footer>
 </footer>
