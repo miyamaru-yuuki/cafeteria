@@ -42,8 +42,11 @@
 
             $('#fm2').submit(function(){
                 kosu = kosu + parseInt($('input[name="kosu"]').val(), 10);
+                // $('#menu2').hide();
                 menuData.forEach(function (data) {
-                    $("#menu2").append('<div><a class="menulink" href="' +data.mid+ '">' +data.mname+ '</a></div>')
+                    if(mid == data.mid){
+                        $("#menu2").append('<p>' +data.mname+ ':' + kosu+ '</p>')
+                    }
                 });
                 return false;
             });
