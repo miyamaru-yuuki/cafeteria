@@ -10,14 +10,16 @@
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
     <script type="text/javascript">
         $(function() {
-            function showMenu(func) {
+            function showMenu() {
                 $.ajax({
                     url: "/api/cafeteria/",
                     type: "GET",
                     async: true,
                     data: null,
                     dataType: "json",
-                    success: func,
+                    success: function (json){
+                        menuData = json.menuData;
+                    },
                     error: function () {
                         alertError()
                     }
@@ -32,25 +34,18 @@
                 var kid = $('input[name="kid"]').val();
                 $('#menu').show();
                 $('#fm1').hide();
-                showMenu(
-                    function (json){
-                        json.menuData.forEach(function (data) {
-                            $("#menu").append('<div><a class="menulink" href="' +data.mid+ '">' +data.mname+ '</a></div>')
-                        });
-                    }
-                );
+                showMenu();
+                menuData.forEach(function (data) {
+                    $("#menu").append('<div><a class="menulink" href="' +data.mid+ '">' +data.mname+ '</a></div>')
+                });
                 return false;
             });
 
             $('#fm2').submit(function(){
                 kosu = kosu + parseInt($('input[name="kosu"]').val(), 10);
-                showMenu(
-                    function (json){
-                        json.menuData.forEach(function (data) {
-                            $("#menu2").append('<div><a class="menulink" href="' +data.mid+ '">' +data.mname+ '</a></div>')
-                        });
-                    }
-                );
+                menuData.forEach(function (data) {
+                    $("#menu2").append('<div><a class="menulink" href="' +data.mid+ '">' +data.mname+ '</a></div>')
+                });
                 return false;
             });
 
