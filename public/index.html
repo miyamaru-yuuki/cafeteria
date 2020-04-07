@@ -42,7 +42,7 @@
 
             $('#fm2').submit(function(){
                 kosu = kosu + parseInt($('input[name="kosu"]').val(), 10);
-                // $('#menu2').hide();
+                $('#menu2').empty();
                 menuData.forEach(function (data) {
                     if(mid == data.mid){
                         $("#menu2").append('<p>' +data.mname+ ':' + kosu+ '</p>')
