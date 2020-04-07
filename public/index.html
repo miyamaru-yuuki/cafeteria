@@ -46,6 +46,8 @@
                 menuData.forEach(function (data) {
                     if(mid == data.mid){
                         $("#menu2").append('<p>' +data.mname+ ':' + kosu+ '</p>')
+                    }else{
+                        $("#menu2").append('<p>' +data.mname+ '</p>')
                     }
                 });
                 return false;
