@@ -44,13 +44,10 @@
                 kosu = 0;
                 kosu = kosu + parseInt($('input[name="kosu"]').val(), 10);
                 $('#menu2').empty();
-                if(flg2){
-                    menuData.forEach(function (data) {
-                        data.kosu = 0;
-                        flg2 = false;
-                    });
-                }
                 menuData.forEach(function (data) {
+                    if(!data.kosu) {
+                        data.kosu = 0;
+                    }
                     if(mid == data.mid){
                         if(data.kosu){
                             data.kosu = data.kosu + kosu;
@@ -69,11 +66,11 @@
                 $('#mname').text(mname);
                 $('#fm2').show();
 
-                if(flg){
+                if ($('#menu2').is(':hidden')) {
+                    // 非表示の場合の処理
                     menuData.forEach(function (data) {
                         $("#menu2").append('<div>' +data.mname+ '</div>')
                     });
-                    flg = false;
                 }
                 $('#fm3').show();
                 $('#kingaku').show();
@@ -82,8 +79,6 @@
 
             var mid;
             var kosu = 0;
-            var flg = true;
-            var flg2 = true;
             $('#menu').hide();
             $('#fm2').hide();
             $('#fm3').hide();
