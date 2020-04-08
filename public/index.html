@@ -45,9 +45,9 @@
                 $('#menu2').empty();
                 menuData.forEach(function (data) {
                     if(mid == data.mid){
-                        $("#menu2").append('<p>' +data.mname+ ':' + kosu+ '</p>')
+                        $("#menu2").append('<div><a class="menulink" href="' +data.mid+ '">' +data.mname+ ':' + kosu+ '</a></p>')
                     }else{
-                        $("#menu2").append('<p>' +data.mname+ '</p>')
+                        $("#menu2").append('<div><a class="menulink" href="' +data.mid+ '">' +data.mname+ '</a></p>')
                     }
                 });
                 return false;
@@ -58,6 +58,11 @@
                 mname = $(this).text();
                 $('#mname').text(mname);
                 $('#fm2').show();
+                menuData.forEach(function (data) {
+                    $("#menu2").append('<div><a class="menulink" href="' +data.mid+ '">' +data.mname+ '</a></div>')
+                });
+                $('#fm3').show();
+                $('#kingaku').show();
                 return false;
             });
 
@@ -65,6 +70,8 @@
             var kosu = 0;
             $('#menu').hide();
             $('#fm2').hide();
+            $('#fm3').hide();
+            $('#kingaku').hide();
             showMenu();
         })
     </script>
@@ -89,6 +96,13 @@
     </form>
     <div name="kosu" id="kosu"></div>
     <div name="menu2" id="menu2">
+    </div>
+    <form id="fm3">
+        <input type="submit" value="注文">
+    </form>
+    <div name="menu" id="kingaku">
+        <p>合計金額：<input type="number" name="kingaku"></p>
+    </div>
     </div>
 </main>
 <footer>
