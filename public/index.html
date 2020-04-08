@@ -41,14 +41,18 @@
             });
 
             $('#fm2').submit(function(){
+                kosu = 0;
                 kosu = kosu + parseInt($('input[name="kosu"]').val(), 10);
                 $('#menu2').empty();
                 menuData.forEach(function (data) {
                     if(mid == data.mid){
-                        $("#menu2").append('<div>' +data.mname+ ':' + kosu+ '</p>')
-                    }else{
-                        $("#menu2").append('<div>' +data.mname+ '</p>')
+                        if(data.kosu){
+                            data.kosu = data.kosu + kosu;
+                        }else{
+                            data.kosu = kosu;
+                        }
                     }
+                    $("#menu2").append('<div>' +data.mname+ ':' + data.kosu+ '</p>')
                 });
                 return false;
             });
@@ -58,10 +62,13 @@
                 mname = $(this).text();
                 $('#mname').text(mname);
                 $('#fm2').show();
-                $('#menu2').empty();
-                menuData.forEach(function (data) {
-                    $("#menu2").append('<div>' +data.mname+ '</div>')
-                });
+
+                if(flg){
+                    menuData.forEach(function (data) {
+                        $("#menu2").append('<div>' +data.mname+ '</div>')
+                    });
+                    flg = false;
+                }
                 $('#fm3').show();
                 $('#kingaku').show();
                 return false;
@@ -69,6 +76,7 @@
 
             var mid;
             var kosu = 0;
+            var flg = true;
             $('#menu').hide();
             $('#fm2').hide();
             $('#fm3').hide();
