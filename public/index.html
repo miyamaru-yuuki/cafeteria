@@ -44,6 +44,12 @@
                 kosu = 0;
                 kosu = kosu + parseInt($('input[name="kosu"]').val(), 10);
                 $('#menu2').empty();
+                if(flg2){
+                    menuData.forEach(function (data) {
+                        data.kosu = 0;
+                        flg2 = false;
+                    });
+                }
                 menuData.forEach(function (data) {
                     if(mid == data.mid){
                         if(data.kosu){
@@ -77,6 +83,7 @@
             var mid;
             var kosu = 0;
             var flg = true;
+            var flg2 = true;
             $('#menu').hide();
             $('#fm2').hide();
             $('#fm3').hide();
