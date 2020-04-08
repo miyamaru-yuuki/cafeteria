@@ -58,6 +58,7 @@
                 mname = $(this).text();
                 $('#mname').text(mname);
                 $('#fm2').show();
+                $('#menu2').empty();
                 menuData.forEach(function (data) {
                     $("#menu2").append('<div>' +data.mname+ '</div>')
                 });
