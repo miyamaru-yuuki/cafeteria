@@ -45,9 +45,9 @@
                 $('#menu2').empty();
                 menuData.forEach(function (data) {
                     if(mid == data.mid){
-                        $("#menu2").append('<div><a class="menulink" href="' +data.mid+ '">' +data.mname+ ':' + kosu+ '</a></p>')
+                        $("#menu2").append('<div>' +data.mname+ ':' + kosu+ '</p>')
                     }else{
-                        $("#menu2").append('<div><a class="menulink" href="' +data.mid+ '">' +data.mname+ '</a></p>')
+                        $("#menu2").append('<div>' +data.mname+ '</p>')
                     }
                 });
                 return false;
@@ -59,7 +59,7 @@
                 $('#mname').text(mname);
                 $('#fm2').show();
                 menuData.forEach(function (data) {
-                    $("#menu2").append('<div><a class="menulink" href="' +data.mid+ '">' +data.mname+ '</a></div>')
+                    $("#menu2").append('<div>' +data.mname+ '</div>')
                 });
                 $('#fm3').show();
                 $('#kingaku').show();
