@@ -37,6 +37,13 @@ class CafeteriaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request){
+        $gname = $request->input('gname');
+        $playersnumbermin = $request->input('playersnumbermin');
+        $playersnumbermax = $request->input('playersnumbermax');
+        $playtime = $request->input('playtime');
+        $recommendedage = $request->input('recommendedage');
+
+        return response()->json(['result' => $ret]);
     }
 
     /**

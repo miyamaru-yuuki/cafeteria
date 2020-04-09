@@ -29,13 +29,35 @@
                 });
             }
 
+            function addUriage(params){
+                $.ajax({
+                    url     : "/api/cafeteria/",
+                    type    : "POST",
+                    async   : true,
+                    data    : params,
+                    dataType: "json",
+                    success : function(json) {
+                        //成功時の処理
+                        // if(json.result){
+                        //     $("#gname").empty();
+                        //     showGame();
+                        //     $("#fm1 input[name]").val('');
+                        // }
+                    },
+                    error: function() {
+                        alertError()
+                    }
+                });
+            }
+
             function alertError(){
                 alert('http通信に失敗しました');
             }
 
             $('#fm1').submit(function(){
-                var kid = $('input[name="kid"]').val();
+                kid = $('input[name="kid"]').val();
                 $('#menu').show();
+                $('#history').show();
                 $('#fm1').hide();
                 menuData.forEach(function (data) {
                     $("#menu").append('<div><a class="menulink" href="' +data.mid+ '">' +data.mname+ '</a></div>')
@@ -60,7 +82,26 @@
                 return false;
             });
 
+            $('#fm3').submit(function(){
+                var kingaku = 0;
+                menuData.forEach(function (data) {
+                    kingaku = kingaku + (data.kosu * data.price);
+                });
+                $("#kingaku").empty();
+                $("#kingaku").append('<p>' +kingaku+ '円</p>')
+
+                var today = new Date();
+                var params = {
+                    hi:today,
+                    kid:kid,
+                    mid:,
+                    kosu:,
+                };
+                return false;
+            });
+
             $(document).on("click",".menulink",function(){
+                $('#history').hide();
                 mid = $(this).attr("href");
                 mname = $(this).text();
                 $('#mname').text(mname);
@@ -77,12 +118,18 @@
                 return false;
             });
 
+            $(document).on("click","#history",function(){
+                return false;
+            });
+
+            var kid = 0;
             var mid;
             var kosu = 0;
             $('#menu').hide();
             $('#fm2').hide();
             $('#fm3').hide();
             $('#kingaku').hide();
+            $('#history').hide();
             showMenu();
         })
     </script>
@@ -112,9 +159,8 @@
         <input type="submit" value="注文">
     </form>
     <div name="menu" id="kingaku">
-        <p>合計金額：<input type="number" name="kingaku"></p>
     </div>
-    </div>
+    <button id="history">注文一覧</button>
 </main>
 <footer>
 </footer>
