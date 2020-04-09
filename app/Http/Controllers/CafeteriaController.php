@@ -104,10 +104,12 @@ class CafeteriaController extends Controller
         $historyData = $uriage
             ->join('menu', 'menu.mid', '=', 'uriage.mid')
             ->join('kaiin', 'kaiin.kid', '=', 'uriage.kid')
-            ->select(DB::raw('sum("kosu") AS sumKosu,sum("price") AS sumPrice,mname,'))
+            ->select(DB::raw('SUM(kosu) AS sumKosu,price*SUM(kosu) AS sumPrice,menu.mid,mname'))
             ->where('kaiin.kid', '=', $kid)
             ->groupBy('menu.mid','mname')
             ->get();
+
+        //SELECT SUM(kosu) AS sumKosu,price*SUM(kosu) AS sumPrice,menu.mid,mname FROM uriage INNER JOIN menu ON menu.mid=uriage.mid INNER JOIN kaiin ON kaiin.kid=uriage.kid WHERE kaiin.kid="1" GROUP BY menu.mid,mname;
 
         return response()->json(['historyData' => $historyData]);
     }
