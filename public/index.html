@@ -90,13 +90,11 @@
                 $("#kingaku").empty();
                 $("#kingaku").append('<p>' +kingaku+ '円</p>')
 
-                var today = new Date();
                 var params = {
-                    hi:today,
                     kid:kid,
-                    mid:,
-                    kosu:,
+                    menuData:menuData
                 };
+                addUriage(params);
                 return false;
             });
 

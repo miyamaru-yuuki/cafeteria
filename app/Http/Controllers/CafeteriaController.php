@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Menu;
+use App\Models\Uriage;
 use DB;
 
 class CafeteriaController extends Controller
@@ -37,13 +38,16 @@ class CafeteriaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request){
-        $gname = $request->input('gname');
-        $playersnumbermin = $request->input('playersnumbermin');
-        $playersnumbermax = $request->input('playersnumbermax');
-        $playtime = $request->input('playtime');
-        $recommendedage = $request->input('recommendedage');
+        $kid = $request->input('kid');
+        $menuData[] = $request->input('menuData');
+        $today = now();
 
-        return response()->json(['result' => $ret]);
+        $uriage = new Uriage();
+        foreach ($menuData as $data){
+            $uriage->create(['hi' => $today,'kid' => $kid,'mid' => $data['mid'],'kosu' => $data['kosu']]);
+        }
+
+        return response()->json(['result' => true]);
     }
 
     /**
