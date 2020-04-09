@@ -39,12 +39,14 @@ class CafeteriaController extends Controller
      */
     public function store(Request $request){
         $kid = $request->input('kid');
-        $menuData[] = $request->input('menuData');
+        $menuData = $request->input('menuData');
         $today = now();
 
         $uriage = new Uriage();
         foreach ($menuData as $data){
-            $uriage->create(['hi' => $today,'kid' => $kid,'mid' => $data['mid'],'kosu' => $data['kosu']]);
+            if($data['kosu'] != 0){
+                $uriage->create(['hi' => $today,'kid' => $kid,'mid' => $data['mid'],'kosu' => $data['kosu']]);
+            }
         }
 
         return response()->json(['result' => true]);
