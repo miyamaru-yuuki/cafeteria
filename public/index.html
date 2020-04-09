@@ -45,12 +45,29 @@
                 });
             }
 
+            function getOrderHistory(kid) {
+                $.ajax({
+                    url: "/api/cafeteria/" + kid,
+                    type: "GET",
+                    async: true,
+                    data: null,
+                    dataType: "json",
+                    success: function (json){
+                        historyData = json.historyData;
+                    },
+                    error: function () {
+                        alertError()
+                    }
+                });
+            }
+
             function alertError(){
                 alert('http通信に失敗しました');
             }
 
             $('#fm1').submit(function(){
                 kid = $('input[name="kid"]').val();
+                getOrderHistory(kid);
                 $('#menu').show();
                 $('#history').show();
                 $('#fm1').hide();
@@ -112,6 +129,9 @@
             });
 
             $(document).on("click","#history",function(){
+                historyData.forEach(function (data) {
+                    alert(data.mname);
+                });
                 return false;
             });
 

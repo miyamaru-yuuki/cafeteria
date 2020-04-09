@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Kaiin;
 use App\Models\Menu;
 use App\Models\Uriage;
 use DB;
@@ -95,5 +96,19 @@ class CafeteriaController extends Controller
      */
     public function destroy($gid)
     {
+    }
+
+    public function orderHistory($kid)
+    {
+        $uriage = new Uriage();
+        $historyData = $uriage
+            ->join('menu', 'menu.mid', '=', 'uriage.mid')
+            ->join('kaiin', 'kaiin.kid', '=', 'uriage.kid')
+            ->select(DB::raw('sum("kosu") AS sumKosu,sum("price") AS sumPrice,mname,'))
+            ->where('kaiin.kid', '=', $kid)
+            ->groupBy('menu.mid','mname')
+            ->get();
+
+        return response()->json(['historyData' => $historyData]);
     }
 }

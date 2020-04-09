@@ -18,3 +18,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::resource('cafeteria','CafeteriaController');
+Route::get('cafeteria/{kid}', 'CafeteriaController@orderHistory');
