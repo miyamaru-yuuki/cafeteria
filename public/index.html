@@ -19,6 +19,9 @@
                     dataType: "json",
                     success: function (json){
                         menuData = json.menuData;
+                        menuData.forEach(function (data) {
+                            data.kosu = 0;
+                        });
                     },
                     error: function () {
                         alertError()
@@ -45,9 +48,6 @@
                 kosu = kosu + parseInt($('input[name="kosu"]').val(), 10);
                 $('#menu2').empty();
                 menuData.forEach(function (data) {
-                    if(!data.kosu) {
-                        data.kosu = 0;
-                    }
                     if(mid == data.mid){
                         if(data.kosu){
                             data.kosu = data.kosu + kosu;
