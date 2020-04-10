@@ -113,6 +113,8 @@ class CafeteriaController extends Controller
             ->join('menu', 'menu.mid', '=', 'uriage.mid')
             ->join('kaiin', 'kaiin.kid', '=', 'uriage.kid')
             ->where('kaiin.kid', '=', $kid)
+            ->orderBy('hi', 'asc')
+            ->orderBy('mname', 'desc')
             ->get();
 
         return response()->json(['historyData' => $historyData]);
