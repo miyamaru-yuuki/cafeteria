@@ -129,7 +129,7 @@
             });
 
             $(document).on("click","#history",function(){
-                $("#historyName").append('<p>'+historyData.0.name+'さんの注文履歴</p>');
+                $("#historyName").append('<p>'+historyData[0].name+'さんの注文履歴</p>');
                 historyData.forEach(function (data) {
                     $("#historyTable").append('<tr><td>' +data.mname+ '</td><td>' +data.kosu+ '</td><td>' +data.price+ '</td><td>' +data.hi+ '</td></tr>')
                 });
