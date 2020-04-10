@@ -129,6 +129,7 @@
             });
 
             $(document).on("click","#history",function(){
+                $("#historyName").append('<p>'+historyData.0.name+'さんの注文履歴</p>');
                 historyData.forEach(function (data) {
                     $("#historyTable").append('<tr><td>' +data.mname+ '</td><td>' +data.kosu+ '</td><td>' +data.price+ '</td><td>' +data.hi+ '</td></tr>')
                 });
@@ -174,6 +175,7 @@
     <div name="menu" id="kingaku">
     </div>
     <button id="history">注文一覧</button>
+    <div id="historyName"></div>
     <table id="historyTable"></table>
 </main>
 <footer>

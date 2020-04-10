@@ -101,13 +101,6 @@ class CafeteriaController extends Controller
     public function orderHistory($kid)
     {
         $uriage = new Uriage();
-//        $historyData = $uriage
-//            ->join('menu', 'menu.mid', '=', 'uriage.mid')
-//            ->join('kaiin', 'kaiin.kid', '=', 'uriage.kid')
-//            ->select(DB::raw('SUM(kosu) AS sumKosu,SUM(price*kosu) AS sumPrice,menu.mid,mname'))
-//            ->where('kaiin.kid', '=', $kid)
-//            ->groupBy('menu.mid','mname')
-//            ->get();
 
         $historyData = $uriage
             ->join('menu', 'menu.mid', '=', 'uriage.mid')
