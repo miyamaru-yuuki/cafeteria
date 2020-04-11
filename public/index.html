@@ -74,7 +74,6 @@
                 $('#menu').show();
                 $('#history').show();
                 $('#fm1').hide();
-                $("#order").prop("disabled", false);
                 menuData.forEach(function (data) {
                     $("#menu").append('<div><a class="menulink" href="' +data.mid+ '">' +data.mname+ '</a></div>')
                 });
@@ -104,16 +103,27 @@
                 menuData.forEach(function (data) {
                     kingaku = kingaku + (data.kosu * data.price);
                 });
-                $("#kingaku").empty();
-                $("#kingaku").append('<p>合計金額:' +kingaku+ '円</p>');
+                // $("#kingaku").empty();
+                // $("#kingaku").append('<p>合計金額:' +kingaku+ '円</p>');
 
                 var params = {
                     kid:kid,
                     menuData:menuData
                 };
                 addUriage(params);
-                alert('注文が完了しました');
-                $("#order").prop("disabled", true);
+                alert('注文が完了しました。合計金額は' +kingaku+ '円です');
+
+                $('#menu').empty();
+                $('#menu2').empty();
+                $('#fm2').hide();
+                $('#fm3').hide();
+                $('#history').hide();
+                $('#historyName').empty();
+                $('#historyTable').empty();
+                $('#fm1').show();
+                menuData.forEach(function (data) {
+                    data.kosu = 0;
+                });
                 return false;
             });
 
@@ -154,7 +164,6 @@
                 $('#menu2').empty();
                 $('#fm2').hide();
                 $('#fm3').hide();
-                $('#kingaku').empty();
                 $('#history').hide();
                 $('#historyName').empty();
                 $('#historyTable').empty();
