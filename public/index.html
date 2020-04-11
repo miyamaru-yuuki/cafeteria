@@ -117,9 +117,6 @@
                 $('#menu2').empty();
                 $('#fm2').hide();
                 $('#fm3').hide();
-                $('#history').hide();
-                $('#historyName').empty();
-                $('#historyTable').empty();
                 $('#fm1').show();
                 menuData.forEach(function (data) {
                     data.kosu = 0;
@@ -129,8 +126,8 @@
 
             $(document).on("click",".menulink",function(){
                 $('#history').hide();
-                $('#historyName').hide();
-                $('#historyTable').hide();
+                $('#historyName').empty();
+                $('#historyTable').empty();
                 mid = $(this).attr("href");
                 mname = $(this).text();
                 $('#mname').empty();
@@ -149,6 +146,8 @@
             });
 
             $(document).on("click","#history",function(){
+                $('#historyName').empty();
+                $('#historyTable').empty();
                 if(historyData){
                     $("#historyName").append('<p>'+historyData[0].name+'さんの注文履歴</p>');
                     $("#historyTable").append('<th>メニュー名</th><th>個数</th><th>金額</th><th>注文日</th>');
@@ -160,13 +159,12 @@
             });
 
             $(document).on("click","#top",function(){
+                $('#historyName').empty();
+                $('#historyTable').empty();
                 $('#menu').empty();
                 $('#menu2').empty();
                 $('#fm2').hide();
                 $('#fm3').hide();
-                $('#history').hide();
-                $('#historyName').empty();
-                $('#historyTable').empty();
                 $('#fm1').show();
 
                 menuData.forEach(function (data) {
