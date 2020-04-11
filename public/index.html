@@ -74,6 +74,7 @@
                 $('#menu').show();
                 $('#history').show();
                 $('#fm1').hide();
+                $("#order").prop("disabled", false);
                 menuData.forEach(function (data) {
                     $("#menu").append('<div><a class="menulink" href="' +data.mid+ '">' +data.mname+ '</a></div>')
                 });
@@ -112,6 +113,7 @@
                 };
                 addUriage(params);
                 alert('注文が完了しました');
+                $("#order").prop("disabled", true);
                 return false;
             });
 
@@ -202,7 +204,7 @@
     <div name="menu2" id="menu2">
     </div>
     <form id="fm3">
-        <input type="submit" value="注文する">
+        <input type="submit" value="注文する" id="order">
     </form>
     <div name="menu" id="kingaku">
     </div>
