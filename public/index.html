@@ -68,12 +68,61 @@
                 alert('http通信に失敗しました');
             }
 
+            function showhideLogin(){
+                $('#menu').hide();
+                $('#fm2').hide();
+                $('#fm3').hide();
+                $('#kingaku').hide();
+                $('#history').hide();
+            }
+
+            function showhideMenuChoice(){
+                $('#menu').show();
+                $('#fm1').hide();
+                $('#history').show();
+            }
+
+            function showhideKosuChoice(){
+                $('#history').hide();
+                $('#historyName').empty();
+                $('#historyTable').empty();
+                $('#mname').empty();
+                $('#fm2').show();
+                $('#fm3').show();
+                $('#kingaku').show();
+            }
+
+            function showhideAfterKosuChoice(){
+                $('#menu2').empty();
+            }
+
+            function showhideOrder(){
+                $('#menu').empty();
+                $('#menu2').empty();
+                $('#fm2').hide();
+                $('#fm3').hide();
+                $('#fm1').show();
+            }
+
+            function showhideHistory(){
+                $('#historyName').empty();
+                $('#historyTable').empty();
+            }
+
+            function showhideTop(){
+                $('#historyName').empty();
+                $('#historyTable').empty();
+                $('#menu').empty();
+                $('#menu2').empty();
+                $('#fm2').hide();
+                $('#fm3').hide();
+                $('#fm1').show();
+            }
+
             $('#fm1').submit(function(){
                 kid = $('input[name="kid"]').val();
                 getOrderHistory(kid);
-                $('#menu').show();
-                $('#history').show();
-                $('#fm1').hide();
+                showhideMenuChoice();
                 menuData.forEach(function (data) {
                     $("#menu").append('<div><a class="menulink" href="' +data.mid+ '">' +data.mname+ '</a></div>')
                 });
@@ -83,7 +132,7 @@
             $('#fm2').submit(function(){
                 kosu = 0;
                 kosu = kosu + parseInt($('input[name="kosu"]').val(), 10);
-                $('#menu2').empty();
+                showhideAfterKosuChoice()
                 $("#menu2").append('<p>確定したメニュー</p>');
                 menuData.forEach(function (data) {
                     if(mid == data.mid){
@@ -103,8 +152,6 @@
                 menuData.forEach(function (data) {
                     kingaku = kingaku + (data.kosu * data.price);
                 });
-                // $("#kingaku").empty();
-                // $("#kingaku").append('<p>合計金額:' +kingaku+ '円</p>');
 
                 var params = {
                     kid:kid,
@@ -112,12 +159,7 @@
                 };
                 addUriage(params);
                 alert('注文が完了しました。合計金額は' +kingaku+ '円です');
-
-                $('#menu').empty();
-                $('#menu2').empty();
-                $('#fm2').hide();
-                $('#fm3').hide();
-                $('#fm1').show();
+                showhideOrder();
                 menuData.forEach(function (data) {
                     data.kosu = 0;
                 });
@@ -125,29 +167,21 @@
             });
 
             $(document).on("click",".menulink",function(){
-                $('#history').hide();
-                $('#historyName').empty();
-                $('#historyTable').empty();
+                showhideKosuChoice();
                 mid = $(this).attr("href");
                 mname = $(this).text();
-                $('#mname').empty();
                 $('#mname').append('<p>選択しているメニュー:' +mname+ '</p>');
-                $('#fm2').show();
-
                 if ($('#menu2').is(':hidden')) {
                     // 非表示の場合の処理
                     menuData.forEach(function (data) {
                         $("#menu2").append('<div>' +data.mname+ '</div>')
                     });
                 }
-                $('#fm3').show();
-                $('#kingaku').show();
                 return false;
             });
 
             $(document).on("click","#history",function(){
-                $('#historyName').empty();
-                $('#historyTable').empty();
+                showhideHistory();
                 if(historyData){
                     $("#historyName").append('<p>'+historyData[0].name+'さんの注文履歴</p>');
                     $("#historyTable").append('<th>メニュー名</th><th>個数</th><th>金額</th><th>注文日</th>');
@@ -159,29 +193,17 @@
             });
 
             $(document).on("click","#top",function(){
-                $('#historyName').empty();
-                $('#historyTable').empty();
-                $('#menu').empty();
-                $('#menu2').empty();
-                $('#fm2').hide();
-                $('#fm3').hide();
-                $('#fm1').show();
-
+                showhideTop();
                 menuData.forEach(function (data) {
                     data.kosu = 0;
                 });
-
                 return false;
             });
 
             var kid = 0;
             var mid;
             var kosu = 0;
-            $('#menu').hide();
-            $('#fm2').hide();
-            $('#fm3').hide();
-            $('#kingaku').hide();
-            $('#history').hide();
+            showhideLogin();
             showMenu();
         })
     </script>
