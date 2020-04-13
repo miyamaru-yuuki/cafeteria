@@ -68,55 +68,48 @@
                 alert('http通信に失敗しました');
             }
 
-            function showhideLogin(){
-                $('#menu').hide();
-                $('#fm2').hide();
-                $('#fm3').hide();
-                $('#kingaku').hide();
-                $('#history').hide();
-            }
-
-            function showhideMenuChoice(){
-                $('#menu').show();
-                $('#fm1').hide();
-                $('#history').show();
-            }
-
-            function showhideKosuChoice(){
-                $('#history').hide();
-                $('#historyName').empty();
-                $('#historyTable').empty();
-                $('#mname').empty();
-                $('#fm2').show();
-                $('#fm3').show();
-                $('#kingaku').show();
-            }
-
-            function showhideAfterKosuChoice(){
-                $('#menu2').empty();
-            }
-
-            function showhideOrder(){
-                $('#menu').empty();
-                $('#menu2').empty();
-                $('#fm2').hide();
-                $('#fm3').hide();
-                $('#fm1').show();
-            }
+            // function showhideLogin(){
+            //     $('#menu').hide();
+            //     $('#fm2').hide();
+            //     $('#fm3').hide();
+            //     $('#kingaku').hide();
+            //     $('#history').hide();
+            // }
+            //
+            // function showhideMenuChoice(){
+            //     $('#menu').show();
+            //     $('#fm1').hide();
+            //     $('#history').show();
+            // }
+            //
+            // function showhideKosuChoice(){
+            //     $('#history').hide();
+            //     $('#historyName').empty();
+            //     $('#historyTable').empty();
+            //     $('#mname').empty();
+            //     $('#fm2').show();
+            //     $('#fm3').show();
+            //     $('#kingaku').show();
+            // }
+            //
+            // function showhideAfterKosuChoice(){
+            //     $('#menu2').empty();
+            // }
 
             function showhideHistory(){
                 $('#historyName').empty();
                 $('#historyTable').empty();
             }
 
-            function showhideTop(){
-                $('#historyName').empty();
-                $('#historyTable').empty();
+            function showhideMenu(){
                 $('#menu').empty();
                 $('#menu2').empty();
+            }
+
+            function showhideAllForm(){
+                $('#fm1').show();
                 $('#fm2').hide();
                 $('#fm3').hide();
-                $('#fm1').show();
             }
 
             $('#fm1').submit(function(){
@@ -159,7 +152,8 @@
                 };
                 addUriage(params);
                 alert('注文が完了しました。合計金額は' +kingaku+ '円です');
-                showhideOrder();
+                showhideMenu();
+                showhideAllForm();
                 menuData.forEach(function (data) {
                     data.kosu = 0;
                 });
@@ -193,7 +187,9 @@
             });
 
             $(document).on("click","#top",function(){
-                showhideTop();
+                showhideHistory();
+                showhideMenu();
+                showhideAllForm();
                 menuData.forEach(function (data) {
                     data.kosu = 0;
                 });
